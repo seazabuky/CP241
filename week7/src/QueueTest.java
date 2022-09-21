@@ -8,7 +8,8 @@ public class QueueTest {
 
         ArrayQueue queue = new ArrayQueue();
         //LinkedQueue queue = new LinkedQueue();
-        while(ch != 6){
+        //CircularArrayQueue queue = new CircularArrayQueue();
+        while(ch != 5){
             try{
                 choice = JOptionPane.showInputDialog(null,
                 "------------------------------------ \n"+
@@ -18,8 +19,7 @@ public class QueueTest {
                 "       2. Dequeue \n"+
                 "       3. Front \n"+
                 "       4. Clear \n"+
-                "       5. Size \n"+
-                "       6. Exit \n"+
+                "       5. Exit \n"+
                 "------------------------------------ \n");
                 ch = Integer.parseInt(choice);
                 switch(ch){
@@ -43,9 +43,6 @@ public class QueueTest {
                         JOptionPane.showMessageDialog(null, "Queue is cleared");
                         break;
                     case 5:
-                        JOptionPane.showMessageDialog(null, "Size of queue is "+queue.length());
-                        break;
-                    case 6:
                         JOptionPane.showMessageDialog(null, "Goodbye");
                         break;
                     default:
@@ -54,7 +51,6 @@ public class QueueTest {
                 }
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null, ex.getMessage());
-                System.exit(0);
                 }
             }
         }
