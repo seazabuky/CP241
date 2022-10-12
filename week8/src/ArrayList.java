@@ -126,15 +126,15 @@ class  ArrayList implements ListADT
 
 	public boolean findkey(Object tKey)
 	{
+		printAll();
 		//bubbleSort();
 		//selectionSort();
-		//insertionSort();
-		quickSort(0,size-1);
+		insertionSort();
+		//quickSort(0,size-1);
 
-		printAll();
 
-		return binSearch(tKey,0,size-1);
-		//return binSearch(tKey);
+		//return binSearch(tKey,0,size-1);
+		return binSearch(tKey);
 
 		//return SeqSearch(tKey);
 		//return SeqSearchWithSentinel(tKey);
@@ -184,7 +184,7 @@ class  ArrayList implements ListADT
 		while (low <= high) 
 		{
 					mid = (low + high) / 2;
-					if (list[mid].equals(key)) 
+					if ((int)list[mid]<(int)key) 
 						low=mid+1;
 					else if ((int)list[mid]>(int)key)
 						high = mid - 1;
@@ -220,15 +220,17 @@ class  ArrayList implements ListADT
 	public void bubbleSort()
 	{
 		Object tmp;
-		for(int i=0;i<size-1;i++)
+		for(int i=0;i<size-1;i++){
 			for(int j=0;j<size-1-i;j++)
 				if((int)list[j]>(int)list[j+1])
 				{
 					tmp = list[j];
 					list[j] = list[j+1];
 					list[j+1] = tmp;
+					
 				}
-		//insert codes here
+				printAll();
+			}
 
 	}
 
@@ -249,6 +251,7 @@ class  ArrayList implements ListADT
 			tmp = list[i];
 			list[i] = list[min_id];
 			list[min_id] = tmp;
+			printAll();
 		}
 		//insert codes here
 
@@ -268,6 +271,7 @@ class  ArrayList implements ListADT
 				   i--;
 			   }
 			   list[i + 1] = tmp;
+			   printAll();
 		   }
 		   //insert codes here
 	
@@ -299,6 +303,7 @@ class  ArrayList implements ListADT
 			quickSort(left,j);
 		if(i<right)
 			quickSort(i,right);
+		printAll();
 		//insert codes here
 
 	}
@@ -307,7 +312,25 @@ class  ArrayList implements ListADT
 	{
 		return size;
 	}
-
+	public void sort(int type){
+		switch(type){
+			case 1:
+				bubbleSort();
+				break;
+			case 2:
+				selectionSort();
+				break;
+			case 3:
+				insertionSort();
+				break;
+			case 4:
+				quickSort(0,size-1);
+				break;
+		}
+	}
+	public void clear(){
+		size = 0;
+	}
 	public void printAll(){
 		for (int i=0;i<size ;i++ )
 		{

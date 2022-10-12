@@ -11,7 +11,7 @@ class ListTest
 		Object obj;
 
 		ArrayList list = new ArrayList();
-		while(ch != 9)
+		while(ch != 10)
 		{
 		try{
 			choice = JOptionPane.showInputDialog(null,
@@ -25,8 +25,9 @@ class ListTest
 				"        5. Find First \n"+
 				"        6. Find Next \n"+
 				"        7. Find Key \n"+
-				"        8. PrintAll \n"+
-				"        9. Exit \n"+
+				"        8. Sort \n"+
+				"        9. Clear \n"+
+				"        10. Exit \n"+
 				" ----------------------------------\n");
 			ch = Integer.parseInt(choice);
 			switch (ch)
@@ -76,14 +77,21 @@ class ListTest
 						break;
 
 			case 8:
-						list.findFirst();
-						for(int i = 0;i<list.getSize();i++)
-						{
-								System.out.print(list.retrieve()+" " );
-								list.findNext();
-						}
+				       int type = Integer.parseInt(JOptionPane.showInputDialog(null,
+					   " ---------------------------------- \n"+
+					   "                          Sort \n"+
+					   " ---------------------------------- \n"+
+					   "        1. Bubble Sort\n"+
+					   "        2. Selection Sort\n"+
+					   "        3. Insertion Sort \n"+
+					   "        4. Quick Sort\n"+
+					   " ----------------------------------\n"));
+						list.sort(type);
 						break;
 			case 9:
+						list.clear();
+						break;
+			case 10:
 						JOptionPane.showMessageDialog(null,
 								"----------End Program ----------",
 								"Quit",
