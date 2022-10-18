@@ -33,16 +33,13 @@ class ListTest
 			switch (ch)
 			{
 			case 1:
-						list.insert(67);
-						list.insert(32);
-						list.insert(75);
-						list.insert(68);
-						list.insert(58);
-						list.insert(55);
-						list.insert(90);
-						list.insert(35);
-						list.insert(40);
-						list.insert(83);
+						list.insert(57);
+						list.insert(92);
+						list.insert(1);
+						list.insert(43);
+						list.insert(25);
+						list.insert(72);
+						list.insert(82);
 						break;
 			case 2:
 						obj = list.retrieve();
