@@ -76,11 +76,13 @@ class ListTest
 
 			case 6:
 						//find key
-						if (list.findkey(67)){
+						e = test.getElement();
+						obj=e;
+						if (list.findkey(e)){
 								System.out.println("Found your key: "+list.retrieve());
 								System.out.println("-----------------------------------------");
 						}else{
-								JOptionPane.showMessageDialog(null,"Not Found");
+							System.out.println("Not Found");
 								System.out.println("-----------------------------------------");
 							}
 						break;

@@ -1,3 +1,6 @@
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 class  ArrayList implements ListADT
 {
 	private int total;
@@ -125,12 +128,6 @@ class  ArrayList implements ListADT
 			}
 	}
 
-	public boolean findkey(Object tKey)
-	{
-		return binSearch(tKey,0,size-1);
-	}
-
-
 	public void sort(int type){
 		switch(type){
 			case 1:
@@ -143,112 +140,91 @@ class  ArrayList implements ListADT
 
 	}
 
-
-	public boolean binSearch( Object key, int low, int high) 
+	public boolean findkey(Object tKey)
 	{
-		int mid = (low + high)/2;
-		if (low > high)
+		return binSearch(tKey,0,size-1);
+	}
+
+	public boolean binSearch(Object tKey,int low,int high){
+		int mid=(low+high)/2;
+		if(low>high)
 			return false;
-		else if (list[mid] == key) {
-			current = mid;
+		else if((int)list[mid]==(int)tKey){
+			current=mid;
 			return true;
 		}
-		else if ((Integer)list[mid] < (Integer)key)
-			return binSearch( key, mid+1, high);
-		else
-			return binSearch( key, low, mid-1);
+		else if((int)list[mid]<(int)tKey)
+			return binSearch(tKey, mid+1, high);
+		else return binSearch(tKey,low,mid-1);
 	}
 
+	public void swap(int i,int j){
+		Object tmp=list[i];
+		list[i]=list[j];
+		list[j]=tmp;
+	}
 
-
-	public void quickSort(int left,int right)
-	{
-		Object tmp,mid; int i,j;
-		i = left; j = right;
-		mid = list[(left + right)/2];
-		do {
-			while((Integer)list[i] < (Integer)mid)
+	public void quickSort(int left,int right){
+		Object mid=list[(left+right)/2];
+		int i=left,j=right;
+		do{
+			while((int)list[i]<(int)mid)
 				i++;
-			while((Integer)mid < (Integer)list[j])
+			while((int)mid<(int)list[j])
 				j--;
-			if (i <= j) {
-				tmp = list[i];
-				list[i] = list[j];
-				list[j] = tmp;
+			if(i<=j){
+				swap(i,j);
 				i++;
 				j--;
 			}
-
-		} while (i <= j);
+		}while(i<=j);
 		printAll();
-		if (left < j) quickSort(left,j);
-		if (i < right) quickSort(i,right);
-
+		if(i<right) quickSort(i, right);
+		if(left<j) quickSort(left, j);
 	}
 
-    public void heapSort() {
-        makeHeap();
-		System.out.print("The data in sequence are: ");
+	public void heapSort(){
+		makeHeap();
 		printAll();
-		System.out.println("-----------------------------------------");
-		System.out.println("The data after in each loop are: ");
-		System.out.println("-----------------------------------------");
-		for(int nodeIndex = size;nodeIndex> 0;nodeIndex--){
-            swap(0, nodeIndex-1);
-            reHeapDown(0, nodeIndex-2);
+		for(int nodeIndex=size;nodeIndex>0;nodeIndex--){
+			swap(0,nodeIndex-1);
+			reHeapDown(0,nodeIndex-2);
 			printAll();
-        }
-    }
-
-    public void makeHeap() {
-        for(int i = size;i>=0;i--){
-            reHeapDown(i, size);
-        }
-    }
-    public void reHeapDown(int root, int bottom) {
-        boolean heapOK = false;
-		int maxChild,leftChild = 2*root+1, rightChild = 2*root+2;
-        while((leftChild<=bottom)&&(!heapOK)){
-            if(leftChild==bottom){
-                maxChild = leftChild;
-				
-			}else if(list[rightChild]==null){
-				maxChild = leftChild;
-
-			}
-			else if((int) list[leftChild]>(int) list[rightChild]){
-				maxChild = leftChild;
-
-			}else{
-				maxChild = rightChild;
-	
-			}
-
-            if(((int)list[root])<((int)list[maxChild])){
-                swap(root, maxChild);
-                root = maxChild;
-				leftChild = 2*root+1;
-				rightChild = 2*root+2;
-            }else
-                heapOK = true;
 		}
-    }
+	}
+	public void makeHeap(){
+		for(int i=size;i>=0;i--)
+			reHeapDown(i,size);
+	}
+	public void reHeapDown(int root,int bottom){
+		boolean heapOK=false;
+		int maxChild,leftChild=2*root+1,rightChild=2*root+2;
+		while(leftChild<=bottom && !heapOK){
+			if(leftChild==bottom || list[rightChild]==null)
+				maxChild=leftChild;
+			else if((int)list[leftChild]<(int)list[rightChild])
+				maxChild=rightChild;
+			else maxChild=leftChild;
 
-
-    public void swap(int i, int j) {
-		Object temp = list[i];
-        list[i] = list[j];
-		list[j] = temp;
-    }
+			if((int)list[root]<(int)list[maxChild]){
+				swap(root,maxChild);
+				root=maxChild;
+				leftChild=2*root+1;
+				rightChild=2*root+2;
+			}else 
+				heapOK=true;
+		}
+	}
 	public int getSize()
 	{
 		return size;
 	}
 
 	public void printAll(){
+		NumberFormat formatter = new DecimalFormat("#0.0");     
 		for (int i=0;i<size ;i++ )
 		{
-			System.out.print(list[i]+ " ");
+			System.out.print(formatter.format(list[i])+ " ");
 		}
 		System.out.println();
 	}
